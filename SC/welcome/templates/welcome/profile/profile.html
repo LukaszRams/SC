@@ -1,0 +1,303 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<article>
+<div class="container-fluid">
+    <div class="row">
+        <!--Profile image-->
+        <aside class="col-2 px-0 mx-0">
+            <img src="{{profile.profile_image.url}}" class="d-block img-thumbnail mx-lg-auto img-fluid-new" alt="Profile Image" width="300" loading="lazy">
+        </aside>
+        <!--End profile image-->
+
+        <!--Background image-->
+        <aside class="col-10 px-0 mx-0">
+            <img src="{{profile.background_image.url}}" class="d-block mx-lg-auto img-fluid-new" alt="Background Image" width="2000" loading="lazy">
+        </aside>
+        <!--End background image-->
+
+        <div class="col-lg-10 offset-lg-1">
+            <!--Profile name-->
+            <header class="h1 text-capitalize pt-3 pb-1">
+                {{profile.sc_name}}
+            </header>
+            <!--End profile name-->
+
+            <!--Description-->
+            <div class="d-block my-3 px-3">
+                <div class="col-12">
+                    <h5 class="h4 text-justify">
+                        {{profile.about}}
+                    </h5>
+                </div>
+            </div>
+            <!--End description-->
+
+            {% if user.is_authenticated and user.username == profile.username %}
+            <!--Buttons allowing to edit profile-->
+            <div class="d-grid gap-2 d-sm-flex justify-content-end mb-5">
+                <ul class="list-inline">
+                    <a class="list-inline-item" href="{% url 'addProject' profile.id %}">
+                        <button type="button" class="btn btn-secondary btn-responsive px-4 me-sm-3">Add Project</button>
+                    </a>
+                    <a class="list-inline-item" href="{% url 'addPost' profile.id %}">
+                        <button type="button" class="btn btn-secondary btn-responsive px-4 me-sm-3">Add Post</button>
+                    </a>
+                    <a class="list-inline-item" href="{% url 'editAccount' profile.id%}">
+                        <button type="button" class="btn btn-secondary btn-responsive px-4 me-sm-3">Edit</button>
+                    </a>
+                </ul>
+            </div>
+            <!--End buttons allowing to edit profile-->
+            {% else %}
+            <!--Apply form-->
+            <div class="d-grid gap-2 d-sm-flex justify-content-start mb-5">
+                <button type="button" class="btn btn-secondary btn-responsive px-4 me-sm-3" data-bs-toggle="modal" data-bs-target="#ApplyModal">
+                    Apply
+                </button>
+            </div>
+            <!--End apply form-->
+            <!--Modal window-->
+            <div class="modal fade" id="ApplyModal" tabindex="-1" aria-labelledby="ApplyModalTitle" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title h1" id="ApplyModalTitle">Apply to the science club</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form  method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="d-block my-3 px-4">
+                                <div class="form-group row">
+                                    <label for="first_name" class="h3 col-12 col-form-label">First name</label>
+                                    <div class="col-12">
+                                        <input id="first_name" name="first_name" class="h4 form-control" required="required" type="text"placeholder="Enter Your first name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="surname" class="col-12 col-form-label h3">Surname</label>
+                                    <div class="col-12">
+                                        <input id="surname" name="surname" class="form-control h4" required="required" type="text"placeholder="Enter Your surname">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="about" class="col-12 col-form-label h3">Why do You want to join us?</label>
+                                    <div class="col-12">
+                                        <textarea id="about" name="about" rows="5" class="h4 form-control" required="required" type="text" placeholder="Describe why You want to join us, Your skills and achievements"></textarea>
+                                    </div>
+                                </div>
+                                <div id="div_mail" class="form-group row">
+                                    <label for="id_mail" class="col-12 col-form-label requiredField h3">Leave us Your mail</label>
+                                    <div class="">
+                                        <input type="email" name="email" maxlength="200" class="h4 textinput textInput form-control" required="required" id="id_mail" placeholder="YourMail@sc.com">
+                                    </div>
+                                </div>
+                                <div id="div_id_phone_number" class="form-group row">
+                                    <label for="id_phone_number" class="col-12 col-form-label h3 requiredField">
+                                        And number
+                                    </label>
+                                    <div class="">
+                                        <input type="tel" name="phone_number" maxlength="17" class="h4 textinput textInput form-control" required="required" id="id_phone_number" placeholder="+48123456789">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="cv" class="col-12 col-form-label h3 ">Maybe you want to leave a CV</label>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-default btn-file btn-responsive">
+                                                <input type="file" class="h4 btn-responsive" id="cv" name="cv">
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'profile' profile.id %}">
+                                    <input class="btn btn-secondary btn-responsive" type="button" value="Cancel">
+                                </a>
+                                <a>
+                                    <input class="btn btn-secondary btn-responsive" type="submit" value="Apply">
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--End modal window-->
+            {% endif %}
+        </div>
+
+        <div class="col-lg-6 col-xl-5 offset-xl-1 mr-xl-3">
+            <header class="h3 text-capitalize border-10 pt-0 pl-2 pb-2 border-bottom border-dark" data-bs-toggle="collapse" href="#proj" role="button" aria-expanded="true" aria-controls="ProjectsCollapse">
+                Projects
+            </header>
+            <div class="collapse show m-0 p-0" id="proj">
+                {% for project in projects %}
+                    <div class="d-block my-3 px-3 border border-5 border-dark rounded-3">
+
+
+                    <!--dropdown setting-->
+                    {% if user.is_authenticated and user.username == profile.username %}
+                        <div class="d-block dropdown mt-2 mb-2 text-right">
+                            <button class="btn btn-secondary dropdown-toggle btn-responsive" type="button" id="Project{{project.id}}" data-bs-toggle="dropdown" aria-expanded="false">
+                            Setting
+                            </button>
+                            <ul class="dropdown-menu p-0" aria-labelledby="Project{{project.id}}">
+                                <li><a class="dropdown-item text-light bg-secondary btn-responsive" href="{% url 'editProject' project.id %}">Edit</a></li>
+                                <!--Modal window-->
+                                <button type="button" class="dropdown-item text-light bg-secondary btn-responsive" data-bs-toggle="modal" data-bs-target="#ProjectModal{{project.id}}">
+                                    Delete
+                                </button>
+                                <!--End modal window-->
+                            </ul>
+                        </div>
+
+                        <!--Modal window-->
+                        <div class="modal fade" id="ProjectModal{{project.id}}" tabindex="-1" aria-labelledby="ProjectModalTitle{{project.id}}" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="h3 modal-title" id="ProjectModalTitle{{project.id}}">Delete project</h3>
+                                        <button type="button" class="btn-close btn-responsive" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="h4">Are You sure you want to delete the project?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a>
+                                            <button type="button" class="btn btn-secondary btn-responsive" data-bs-dismiss="modal">Cancel</button>
+                                        </a>
+                                        <a href="{% url 'deleteProject' project.id%}" >
+                                            <button type="button" class="btn btn-secondary btn-responsive">Yes, I want</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End modal window-->
+
+                    {% endif %}
+                    <!--dropdown end-->
+
+                    <!--Project title-->
+                    <header class="h3 text-capitalize border-10 pt-3 pl-4 pb-2">
+                        {{project.title}}
+                    </header>
+                    <!--End project title-->
+
+                    <!--Project about-->
+                    <p class="h5 text-justify">
+                        {{project.about}}
+                    </p>
+                    <!--End project about-->
+
+                    <!--Project image-->
+                    {% if project.image%}
+                        <img src="{{project.image.url}}" class="d-block mx-auto img-fluid mb-3" alt="{{project.title}} Image" width="900" loading="lazy">
+                    {% endif%}
+                    <!--End project image-->
+
+                    <!--Project time limits-->
+                    {% if project.active %}
+                        <p class="h6 pl-3 mb-1"><b>START: </b>{{project.start_date}}</p>
+                        <p class="h6 pl-3 mb-3"><b>END: </b>{{project.deadline}}</p>
+                    {% else %}
+                        <p class="h6 pl-3 mb-3"><b>THE PROJECT IS INACTIVE</b></p>
+                    {% endif %}
+                    <!--End project time limits-->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-xl-5 ml-xl-3">
+            <header class="h3 text-capitalize border-10 pt-0 pl-2 pb-2 border-bottom border-dark" data-bs-toggle="collapse" href="#posts" role="button" aria-expanded="true" aria-controls="ProjectsCollapse">
+                Posts
+            </header>
+            <div class="collapse show m-0 p-0" id="posts">
+                {% for post in posts %}
+                    <div class="d-block my-3 px-3 border border-5 border-dark rounded-3">
+
+
+                    <!--dropdown setting-->
+                    {% if user.is_authenticated and user.username == profile.username %}
+                        <div class="d-block dropdown mt-2 mb-2 text-right">
+                            <button class="btn btn-secondary dropdown-toggle btn-responsive" type="button" id="Post{{post.id}}" data-bs-toggle="dropdown" aria-expanded="false">
+                            Setting
+                            </button>
+                            <ul class="dropdown-menu p-0" aria-labelledby="Post{{post.id}}">
+                                <li><a class="dropdown-item text-light bg-secondary btn-responsive" href="{% url 'editPost' post.id%}">Edit</a></li>
+                                <!--Modal window-->
+                                <button type="button" class="dropdown-item text-light bg-secondary btn-responsive" data-bs-toggle="modal" data-bs-target="#PostModal{{post.id}}">
+                                    Delete
+                                </button>
+                                <!--End modal window-->
+                            </ul>
+                        </div>
+                        <!--Modal window-->
+                        <div class="modal fade" id="PostModal{{post.id}}" tabindex="-1" aria-labelledby="PostModalTitle{{post.id}}" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="h3 modal-title" id="PostModalTitle{{post.id}}">Delete post</h3>
+                                        <button type="button" class="btn-close btn-responsive" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="h4">Are You sure you want to delete the post?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a>
+                                            <button type="button" class="btn btn-secondary btn-responsive" data-bs-dismiss="modal">Cancel</button>
+                                        </a>
+                                        <a href="{% url 'deletePost' post.id%}" >
+                                            <button type="button" class="btn btn-secondary btn-responsive">Yes, I want</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End modal window-->
+                    {% endif %}
+                    <!--dropdown end-->
+
+                    <!--Post date-->
+                    <p class="h6 pt-3 mb-0 text-end">{{post.publication_date.date}}</p>
+                    <p class="h6 pt-0 mb-0 text-end">{{post.publication_date.time}}</p>
+                    <!--End post date-->
+
+                    <!--Post title-->
+                    <header class="h3 text-capitalize border-10 pt-3 pl-4 pb-2">
+                        {{post.title}}
+                    </header>
+                    <!--End post title-->
+
+                    <!--Post about-->
+                    <p class="h5 text-justify">
+                        {{post.contents}}
+                    </p>
+                    <!--End post about-->
+
+                    <!--Post image-->
+                    {% if post.image%}
+                        <img src="{{post.image.url}}" class="d-block mx-auto img-fluid mb-3" alt="{{post.title}} Image" width="900" loading="lazy">
+                    {% endif%}
+                    <!--End post image-->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</article>
+
+
+
+
+
+{% endblock %}

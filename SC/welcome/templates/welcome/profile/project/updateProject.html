@@ -1,0 +1,110 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="container py-5">
+    <div class="col-md-8 offset-md-2">
+        <h1 class="h1">Update project:</h1>
+        <form method="POST" enctype="multipart/form-data">
+        {% load static %}
+        {% csrf_token %}
+
+        <div class="d-block my-3 px-3 border border-5 border-dark rounded-3">
+            <div class="form-group row">
+                <label for="title" class="h3 col-12 col-form-label">Title</label>
+                <div class="col-12">
+                    <input id="title" name="title" value="{{project.title}}" class="h4 form-control here" required="required" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="about" class="col-12 col-form-label h3">About</label>
+                <div class="col-12">
+                    <textarea id="about" name="about" rows="15" class="h4 form-control" required="required" type="text">{{project.about}}</textarea>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="active" class="h3 col-12 col-form-label">Is active?</label>
+                <div class="col-12">
+                    <input type="checkbox" id="active" name="active" {% if project.active %} checked {% endif %} onchange="document.getElementById('start').disabled = !this.checked; document.getElementById('deadline').disabled = !this.checked;"/>
+                </div>
+                <label for="start" class="h3 col-12 col-form-label">Start date</label>
+                <div class="col-12">
+                    <input type="date" class="h4" {% if not project.active %} disabled="disabled" {% endif %} name="start_date"  id="start" value="{{project.start_date.year}}-{{project.start_date.month}}-{{project.start_date.day}}" min="2018-01-01" max="2300-12-31">
+                </div>
+                <label for="deadline" class="h3 col-12 col-form-label">Deadline</label>
+                <div class="col-12">
+                    <input type="date" {% if not project.active %} disabled="disabled" {% endif %} value="{{project.deadline.year}}-{{project.deadline.month}}-{{project.deadline.day}}" id="deadline" class="h4" name="deadline" min="2018-01-01" max="2300-12-31">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="h3 col-12 col-form-label">Upload Image</label>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="h4 btn btn-default btn-file">
+                        Browse…<input type="file" id="imgInp" name="image">
+                        </span>
+                    </span>
+                    <input type="text" id="image" class="form-control" style="display: none" readonly="">
+                </div>
+                {% if project.image %}
+                    <img id="img-upload" src="{{project.image.url}}" class="d-block mx-auto img-fluid" width="900">
+                {% else %}
+                    <img id="img-upload" class="d-block mx-auto img-fluid" width="900">
+                {% endif %}
+                <script type="text/javascript">
+                    Date.prototype.toDateInputValue = (function() {
+                        var local = new Date(this);
+                        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                        return local.toJSON().slice(0,10);
+                    });
+
+                    $(document).ready( function() {
+                        if (!document.getElementById('active').checked){
+                            $('#start').val(new Date().toDateInputValue());
+                            $('#deadline').val(new Date().toDateInputValue());
+                        }
+                        $(document).on('change', '.btn-file :file', function() {
+                        var input = $(this),
+                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        input.trigger('fileselect', [label]);
+                        });
+                        $('.btn-file :file').on('fileselect', function(event, label) {
+                            var input = $(this).parents('.input-group').find(':text'),
+                                log = label;
+
+                            if( input.length ) {
+                                input.val(log);
+                            } else {
+                                if( log ) alert(log);
+                            }
+                        });
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    $('#img-upload').attr('src', e.target.result);
+                                }
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        $("#imgInp").change(function(){
+                            readURL(this);
+                        });
+                    });	</script>
+            </div>
+            <div class="text-right mb-4">
+                <a href="{% url 'profile' user.id %}">
+                    <input class="btn btn-secondary btn-responsive" type="button" value="Cancel">
+                </a>
+                <input class="btn btn-secondary btn-responsive" type="submit" value="Edit">
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

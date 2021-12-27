@@ -1,0 +1,36 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container py-5">
+    <h1 class="mt-5 pt-5">Login</h1>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <div id="div_id_username" class="form-group">
+                <label for="id_username" class=" requiredField">
+                    Username
+                </label>
+                <div>
+                    <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" class="textinput textInput form-control" required id="id_username">
+                </div>
+            </div>
+            <div id="div_id_password" class="form-group">
+                <label for="id_password" class=" requiredField">
+                    Password
+                </label>
+                <div>
+                    <input type="password" name="password" autocomplete="current-password" class="textinput textInput form-control" required id="id_password">
+                </div>
+            </div>
+
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+            <input class="btn btn-secondary btn-responsive" type="submit" value="Sign In">
+        </form>
+        <p class="text-center">Don't have an account? <a href="{% url 'signup' %}">Create an account</a>.</p>
+        <p class="text-center"><a href="{% url 'generate_token' %}">Forget password?</a></p>
+    </div>
+</div>
+{% endblock %}

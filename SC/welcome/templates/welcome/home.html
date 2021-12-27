@@ -1,0 +1,35 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+
+{% if clubs %}
+        {% for club in clubs %}
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div class="col-6 offset-3 col-lg-6 offset-lg-0">
+                        <img src="{{club.profile_image.url}}" class="d-block mx-auto img-fluid" alt="profile_image" width="300" height="300" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="h1 display-5 fw-bold lh-1 mb-3 text-center">{{ club.sc_name }}</h1>
+                        <p class="h3 lead text-justify">{{ club.about }}</p>
+                        <div class="d-grid gap-2 d-md-flex text-justify justify-content-center">
+                            <a href="{% url 'profile' club.id%}">
+                                <button type="button" class="btn btn-secondary btn-responsive px-4 me-md-2">More</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+{% else %}
+    <p>No Science Clubs are available.</p>
+{% endif %}
+
+
+
+
+{% endblock %}

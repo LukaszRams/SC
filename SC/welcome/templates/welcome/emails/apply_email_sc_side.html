@@ -1,0 +1,26 @@
+<!--This is the message that is sent to SC after someone applies to the club-->
+<html>
+    <body>
+        <div style="padding:50px">
+            <div style="height: 100%; width:100%">
+                <h1 style="font-size: 22px; font-weight: bold">{{ title }}</h1>
+                <div style="text-align: justify;">
+                    <p style="font-size: 18px">
+                    {{ content }}
+                    </p>
+                    <p style="font-size: 18px">{{ author }}</p>
+                    <p style="padding: 0; margin: 0; margin-top: 2px">
+                        <a href="callto:{{phone_number}}">
+                            {{ phone_number }}
+                        </a>
+                    </p>
+                    <p style="padding: 0; margin: 0; margin-top: 2px">
+                        <a href="mailto:{{email_address}}">
+                            {{ email_address }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

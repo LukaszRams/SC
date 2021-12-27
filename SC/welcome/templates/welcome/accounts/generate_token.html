@@ -1,0 +1,52 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container py-5">
+    <!--Modal window-->
+    <div class="modal fade" id="IdInfoModal" tabindex="-1" aria-labelledby="InfoModal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="h3 modal-title" id="InfoModal">Generate token</h3>
+                    <button type="button" class="btn-close btn-responsive" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ol>
+                        <li class="h4">
+                            Enter your username and generate a token
+                        </li>
+                        <li class="h4">
+                            You will receive an email with a link and a token for changing your password
+                        </li>
+                        <li class="h4">
+                            Follow the link and enter the relevant data
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End modal window-->
+
+    <h1 class="h1 mt-5 pt-5 pb-0">Generate token <button class="h5 border px-1 mt-0 border-5 border-secondary bg-secondary text-light rounded-circle" data-bs-toggle="modal" data-bs-target="#IdInfoModal"><span>?</span></button></h1>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <div id="div_id_username" class="form-group">
+                <label for="username" class="h3 requiredField">
+                    Username
+                </label>
+                <div>
+                    <input type="text" name="username" autofocus class="h4 textinput textInput form-control" required id="username">
+                </div>
+            </div>
+
+            <input class="btn btn-secondary btn-responsive" type="submit" value="Generate">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

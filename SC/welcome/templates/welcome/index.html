@@ -1,0 +1,74 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<div class="px-4 pt-5 my-5 text-center">
+    <h1 class="h1 display-4 fw-bold">SC - Science Clubs</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="h3 lead mb-4 text-justify">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere vestibulum convallis. Ut auctor dui ac neque efficitur blandit. Cras a odio molestie, ullamcorper purus nec, tincidunt massa. Nulla non efficitur felis, sed lobortis elit. Proin suscipit ex ut sapien elementum ultrices. Praesent dapibus arcu eu erat malesuada sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum laoreet sodales viverra. Mauris porttitor, enim lacinia lobortis vehicula, velit dolor vehicula enim, eu posuere felis risus ac mi.
+        Nulla ex orci, auctor et nunc at, congue euismod justo. Maecenas auctor est ex, quis volutpat justo placerat non. Nullam consectetur, nunc eu consequat commodo, metus nisi tempor mi, vel sagittis nunc purus ut purus. Donec non dolor vitae mi placerat iaculis id ac ex. Ut mollis fringilla risus eget tincidunt. Mauris ultricies ullamcorper velit, sit amet ultrices tellus dictum a. Morbi placerat elit id ultricies laoreet. Duis pellentesque sodales risus, porttitor egestas purus pellentesque id. Integer pharetra eros sed lobortis auctor. Curabitur feugiat odio ac erat faucibus efficitur. Donec in sapien quis ante accumsan dapibus sit amet et urna. Nullam feugiat lectus quis mi blandit faucibus ut a erat. Proin ultrices varius erat at semper. Integer tortor erat, tempor in placerat eget, iaculis et nulla.
+        </p>
+    </div>
+    <div class="overflow-hidden" style="max-height: 90vh;">
+        <div class="container px-5" style="display: block">
+            <img src="{% static 'welcome/images/home.jpg' %}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Przykładowy obraz" width="700" height="500" loading="lazy">
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            <a>
+                <button type="button" class="btn btn-outline-secondary btn-responsive px-4 me-sm-3" data-bs-toggle="modal" data-bs-target="#AboutModal">More</button>
+            </a>
+            <a href="{% url 'home' %}">
+                <button type="button" class="btn btn-secondary btn-responsive px-4 me-sm-3">Home</button>
+            </a>
+        </div>
+        <div class="modal fade" id="AboutModal" tabindex="-1" aria-labelledby="AboutModalTitle" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ApplyModalTitle">SC description</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="d-block my-3 px-4">
+                        <p class="h5 text-justify">
+                            Nunc est ligula, porta ac feugiat ac, fermentum non arcu. Ut rhoncus elit sit amet nulla mollis, vitae cursus felis vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris consectetur mi velit, at ultrices enim gravida nec. Duis in porta mauris, eget scelerisque tellus. Nulla ultricies libero ut bibendum mollis. Aliquam dignissim gravida varius. Curabitur placerat tincidunt aliquet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Duis consequat venenatis massa id consequat. Nunc fermentum nec nisi sit amet luctus. Phasellus commodo felis vel nisi condimentum ullamcorper. Phasellus laoreet ac sapien sed venenatis. Aenean pretium, enim vitae ultricies egestas, orci ex consequat ipsum, non elementum nulla risus nec odio. Fusce sed sapien posuere, consectetur felis eu, congue velit.
+                        </p>
+
+                        <p class="h5 text-justify">
+                            Morbi vel tincidunt erat. Phasellus eleifend lectus felis, et sollicitudin risus scelerisque vestibulum. Cras neque nulla, feugiat sed magna a, sollicitudin mollis ante. Sed rhoncus tempus odio non dignissim. Phasellus rhoncus neque vel arcu imperdiet vestibulum. Vivamus quis turpis at sem consequat accumsan quis ac neque. Sed at efficitur elit. Curabitur commodo egestas ornare. Sed ut magna vitae eros laoreet lacinia. Suspendisse leo nisi, sollicitudin ut luctus eget, consectetur quis leo.
+                        </p>
+                        <p class="h5 text-justify">
+                            Curabitur convallis elit a nisl fermentum tincidunt. Morbi lobortis libero et facilisis fermentum. Suspendisse tristique urna ac lacus vestibulum, nec auctor eros sagittis. Phasellus non elit pharetra, accumsan lacus in, mollis felis. Curabitur maximus placerat viverra. Sed a placerat magna, sed luctus velit. Duis eget nunc quam. Phasellus sit amet auctor elit. Nullam lorem leo, convallis at bibendum nec, commodo in sem. Praesent a suscipit purus, non imperdiet ex. Fusce pharetra tellus sit amet ipsum tincidunt, at fermentum elit lacinia. Fusce malesuada quam eget dolor placerat aliquet. Etiam ut finibus orci. Quisque eu accumsan est.
+                        </p>
+                        <p class="h5 text-justify">
+                            Morbi pretium lacus massa, eget maximus sapien semper ut. Donec consequat lacus vitae auctor iaculis. Donec iaculis ac quam bibendum pulvinar. Morbi et euismod diam. Fusce maximus sagittis eros, nec dapibus lacus tempor ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin id nibh convallis, consequat nisi quis, consequat elit. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                        </p>
+                        <p class="h5 text-justify">
+                            Donec vitae leo fringilla, molestie nibh eget, maximus enim. Morbi finibus orci tellus, a dictum neque fringilla quis. Pellentesque pharetra, diam sit amet bibendum fringilla, ipsum nulla lobortis velit, eget lacinia eros felis sed eros. Nullam tempor enim et felis facilisis, a volutpat dui elementum. Integer in quam arcu. Duis in nulla vel risus dapibus consectetur. Fusce vulputate mi id justo lobortis molestie. Etiam ornare ullamcorper lorem, eu semper lacus pellentesque eget. Fusce quis lorem vitae ligula elementum pellentesque in et turpis. Proin convallis tortor non eros venenatis faucibus. Sed tempus viverra egestas.
+                        </p>
+                        <p class="h5 text-justify">
+                            Nunc gravida nulla et tristique feugiat. Nullam eleifend sagittis quam, ac porttitor mi facilisis in. Suspendisse metus quam, laoreet eu risus et, viverra elementum ligula. Morbi dignissim lacinia placerat. Quisque vel pretium dui, ut consectetur quam. Aenean consequat pellentesque odio, non varius urna semper vitae. Vivamus tristique diam sit amet interdum tempor. Mauris sit amet metus facilisis, lacinia risus ac, rutrum erat.
+                        </p>
+                        <p class="h5 text-justify">
+                            Mauris in gravida massa. Proin luctus eleifend orci a ullamcorper. Cras condimentum eu dolor a scelerisque. Vivamus felis neque, tristique sit amet velit nec, ullamcorper dignissim elit. Suspendisse tincidunt eleifend elit, congue ultricies quam maximus eu. Maecenas venenatis leo sed lectus rhoncus vulputate. Donec a libero sed ipsum lacinia euismod quis eget mauris. Etiam blandit est egestas consectetur accumsan. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin posuere quam quis arcu luctus, vitae consequat nunc lacinia.
+                        </p>
+                        <p class="h5 text-justify">
+                            Pellentesque iaculis dolor a lorem pharetra, ac cursus risus ultrices. Phasellus ut nisl ultricies, dictum risus ac, vehicula mi. Vivamus tempus dolor ante, sit amet placerat sapien convallis euismod. Proin lacus nulla, pellentesque non nisi ac, vulputate lacinia turpis. Suspendisse placerat condimentum leo vulputate consectetur. Pellentesque pulvinar placerat blandit. Quisque nec lectus molestie, ornare enim nec, tincidunt tellus. Vestibulum sit amet rhoncus sem.
+                        </p>
+                        <p class="h5 text-justify">
+                            Maecenas posuere enim eu tellus placerat, ac ullamcorper velit vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consectetur magna at leo pellentesque, sed mollis tellus ultricies. Nam quis orci aliquam, varius risus eu, blandit justo. Donec arcu nunc, cursus vitae maximus tristique, pharetra vitae libero. Aliquam vitae enim neque. Vestibulum iaculis ornare diam eget congue. Pellentesque quis ipsum ipsum. Proin ut hendrerit metus, eget interdum urna. Curabitur efficitur porta posuere.
+                        </p>
+                        <p class="h5 text-justify">
+                            Nulla vestibulum, diam et pretium molestie, metus massa convallis dui, eu ullamcorper felis augue ut risus. In hac habitasse platea dictumst. Suspendisse eget purus lectus. Sed vitae elementum nisi. Sed tincidunt dapibus ligula, quis hendrerit tellus finibus at. Integer elementum accumsan sem, et cursus mi volutpat a. Vestibulum gravida, lorem vel sagittis dapibus, tortor est faucibus sapien, eu malesuada lorem orci at leo. Maecenas euismod maximus ipsum, tincidunt feugiat mi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis justo est, tristique ac laoreet ac, mattis quis nisi. Donec vehicula viverra elit a venenatis. Maecenas pulvinar non felis eu accumsan. Praesent nec magna tempus, porta tellus at, pellentesque purus. Integer bibendum libero sit amet magna cursus tristique mattis et libero. Maecenas scelerisque, mi vitae vulputate aliquet, orci mauris bibendum risus, ut mattis ex leo a dui.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

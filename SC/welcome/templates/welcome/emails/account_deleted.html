@@ -1,0 +1,23 @@
+<!--This is the message that is sent when you delete your accounts-->
+<html>
+    <body>
+        <div style="padding:50px">
+            <div style="height: 100%; width:100%">
+                <h1 style="font-size: 22px; font-weight: bold">Delete account</h1>
+                <div style="text-align: justify;">
+                    <p style="font-size: 18px">
+                        Thank you for your time together and we hope you will <br/>
+                        come back to us. Your account and all data has been deleted.
+                    </p>
+                    <p style="font-size: 18px; margin-bottom: 0; padding-bottom: 0">We will miss you <strong>{{ name }}</strong></p>
+                    <!--TODO: Change localhost to adress-->
+                    <a href="http://localhost:8000{% url 'home' %}">
+                        <p style="margin-top: 0; padding-top: 0">
+                            SC-Science Clubs
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

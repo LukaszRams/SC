@@ -1,0 +1,124 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="container py-5">
+    <div class="col-md-8 offset-md-2">
+        <h1 class="h1">Update profile:</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% load static %}
+            {% csrf_token %}
+
+            <div class="d-block my-3 px-3 border border-5 border-dark rounded-3">
+                <div class="form-group row">
+                    <label for="about" class="col-12 col-form-label h3">About</label>
+                    <div class="col-12">
+                        <textarea id="about" name="about" rows="15" class="h4 form-control" required="required" type="text">{{profile.about}}</textarea>
+                    </div>
+                </div>
+                <div id="div_id_email" class="form-group">
+                    <label for="id_email" class="h3 requiredField">
+                        Email
+                    </label>
+                    <div class="">
+                        <input type="email" name="email" class="emailinput form-control h4" value="{{ profile.email }}" required="" id="id_email">
+                    </div>
+                </div>
+
+                <div id="div_id_phone_number" class="form-group">
+                    <label for="id_phone_number" class="h3 requiredField">
+                        Phone number
+                    </label>
+                    <div class="">
+                        <input type="text" name="phone_number" maxlength="17" class="h4 textinput textInput form-control" required="" id="id_phone_number" value="{{ profile.phone_number }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="imgInp" class="col-12 h3 col-form-label">Profile image</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default h4 btn-file">
+                            Browse…<input type="file" id="imgInp" name="profile_image">
+                            </span>
+                        </span>
+                        <input type="text" id="prof_image" class="form-control" style="display: none" readonly="">
+                    </div>
+                    {% if profile.profile_image %}
+                        <img id="show_prof" src="{{profile.profile_image.url}}" class="d-block mx-auto img-fluid" width="300" style="max-width: 300px">
+                    {% else %}
+                        <img id="show_prof" class="d-block mx-auto img-fluid" width="300" style="max-width: 300px">
+                    {%  endif %}
+                </div>
+
+                <div class="form-group row">
+                    <label for="imgBck" class="col-12 h3 col-form-label">Background image</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file h4">
+                            Browse…<input type="file" id="imgBck" name="background_image">
+                            </span>
+                        </span>
+                        <input type="text" id="back_image" class="form-control" style="display: none" readonly="">
+                    </div>
+                    {% if profile.background_image %}
+                        <img id="show_back" src="{{profile.background_image.url}}" class="d-block mx-auto img-fluid" width="2000">
+                    {% else %}
+                        <img id="show_back" class="d-block mx-auto img-fluid" width="2000">
+                    {%  endif %}
+                </div>
+
+                <div class="text-right mb-4">
+                    <a href="{% url 'profile' user.id %}">
+                        <input class="btn btn-secondary btn-responsive" type="button" value="Cancel">
+                    </a>
+                    <input class="btn btn-secondary btn-responsive" type="submit" value="Edit">
+                </div>
+                <script type="text/javascript">
+                    $(document).ready( function() {
+                        $(document).on('change', '.btn-file :file', function() {
+                        var input = $(this),
+                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        input.trigger('fileselect', [label]);
+                        });
+                        $('.btn-file :file').on('fileselect', function(event, label) {
+                            var input = $(this).parents('.input-group').find(':text'),
+                                log = label;
+
+                            if( input.length ) {
+                                input.val(log);
+                            } else {
+                                if( log ) alert(log);
+                            }
+                        });
+
+                        function readURL(input, t) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    if (t == "imgInp"){
+                                        $('#show_prof').attr('src', e.target.result);
+                                    } else {
+                                        $('#show_back').attr('src', e.target.result);
+                                    }
+                                    }
+                                }
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        $("#imgInp").change(function(){
+                            readURL(this, "imgInp");
+                        });
+                        $("#imgBck").change(function(){
+                            readURL(this, "imgBck");
+                        });
+                    });
+                </script>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

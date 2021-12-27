@@ -1,0 +1,25 @@
+<!--This is the message that is sent to candidate after candidate applies to the club-->
+<html>
+
+    <body>
+        <div style="padding:50px">
+            <div style="height: 100%; width:100%">
+                <h1 style="font-size: 22px; font-weight: bold">{{ title }}</h1>
+                <div style="text-align: justify;">
+                    <p style="font-size: 18px">
+                        Thank You for submitting your application to our <br/>
+                        science club. We will process Your application as<br/>
+                        soon as possible and will contact You by email or telephone.
+                    </p>
+                    <p style="font-size: 18px; margin-bottom: 0; padding-bottom: 0">{{ author }}</p>
+                    <!--TODO: Change localhost to adress-->
+                    <a href="http://localhost:8000{% url 'profile' profile_id %}">
+                        <p style="margin-top: 0; padding-top: 0">
+                            Visit our profile to keep up to date with our activities
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

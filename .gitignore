@@ -1,0 +1,7 @@
+.idea/
+venv/
+SC/.env
+SC/db.sqlite3
+SC/SC/__pycache__
+SC/welcome/__pycache__
+SC/welcome/migrations/__pycache__

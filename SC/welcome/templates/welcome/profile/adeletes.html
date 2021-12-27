@@ -1,0 +1,30 @@
+{% extends "welcome/templates/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="container py-5">
+    <div class="col-md-8 offset-md-2 mt-5 pt-5">
+        <h3 class="h3 text-center">Profile:</h3>
+        <h1 class="h1 text-center text-uppercase my-3" style="color: gray">{{name}}</h1>
+        <h3 class="h3 text-center">Has been successfully deleted</h3>
+    </div>
+    <div class="col-md-8 offset-md-2 mt-5">
+        <p class="h5 text-center">
+            Do You want to go to the main page, sign in or sign up?
+        </p>
+        <div class="text-center">
+            <a href="{% url 'welcome' %}">
+                <button type="button" class="btn btn-secondary btn-responsive px-4 me-md-2">Main page</button>
+            </a>
+            <a href="{% url 'signin' %}">
+                <button type="button" class="btn btn-secondary btn-responsive px-4 me-md-2">Sign in</button>
+            </a>
+            <a href="{% url 'signup' %}">
+                <button type="button" class="btn btn-secondary btn-responsive px-4 me-md-2">Sign up</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
