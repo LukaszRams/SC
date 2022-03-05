@@ -18,19 +18,15 @@
                         <textarea id="about" name="about" rows="15" class="h4 form-control" required="required" type="text">{{profile.about}}</textarea>
                     </div>
                 </div>
-                <div id="div_id_email" class="form-group">
-                    <label for="id_email" class="h3 requiredField">
-                        Email
-                    </label>
+                <div id="div_id_email" class="form-group row">
+                    <label for="id_email" class="col-12 col-form-label h3 requiredField">Email</label>
                     <div class="">
                         <input type="email" name="email" class="emailinput form-control h4" value="{{ profile.email }}" required="" id="id_email">
                     </div>
                 </div>
 
-                <div id="div_id_phone_number" class="form-group">
-                    <label for="id_phone_number" class="h3 requiredField">
-                        Phone number
-                    </label>
+                <div id="div_id_phone_number" class="form-group row">
+                    <label for="id_phone_number" class="col-12 col-form-label h3 requiredField">Phone number</label>
                     <div class="">
                         <input type="text" name="phone_number" maxlength="17" class="h4 textinput textInput form-control" required="" id="id_phone_number" value="{{ profile.phone_number }}">
                     </div>

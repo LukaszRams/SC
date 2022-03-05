@@ -5,3 +5,7 @@ SC/db.sqlite3
 SC/SC/__pycache__
 SC/welcome/__pycache__
 SC/welcome/migrations/__pycache__
+SC/uploads/club/background_image/
+SC/uploads/club/post_image/
+SC/uploads/club/profile_image/
+SC/uploads/club/project_image/

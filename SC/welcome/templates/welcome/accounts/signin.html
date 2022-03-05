@@ -9,6 +9,7 @@
     <div>
         <form method="POST">
             {% csrf_token %}
+
             <div id="div_id_username" class="form-group">
                 <label for="id_username" class=" requiredField">
                     Username
@@ -17,6 +18,7 @@
                     <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" class="textinput textInput form-control" required id="id_username">
                 </div>
             </div>
+
             <div id="div_id_password" class="form-group">
                 <label for="id_password" class=" requiredField">
                     Password
